@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAMB Eligibility Checker</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #eef7ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 {
+      color: #003366;
+    }
+    select, input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 85%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>University JAMB Eligibility Checker</h2>
+    <input type="number" id="scoreInput" placeholder="Enter your JAMB score">
+    <select id="courseSelect">
+      <option value="">Select Course</option>
+      <option value="medicine">Medicine</option>
+      <option value="engineering">Engineering</option>
+      <option value="sciences">Sciences</option>
+      <option value="arts">Arts</option>
+    </select>
+    <button onclick="verify()">Check Eligibility</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkEligibility(score, course) {
+      course = course.toLowerCase();
+      let cutoff;
+
+      if (course === "medicine") {
+        cutoff = 280;
+      } else if (course === "engineering") {
+        cutoff = 250;
+      } else if (course === "sciences") {
+        cutoff = 220;
+      } else if (course === "arts") {
+        cutoff = 200;
+      } else {
+        return "Invalid course entered.";
+      }
+
+      if (score >= cutoff) {
+        return `Eligible ✅ (Cutoff: ${cutoff})`;
+      } else {
+        return `Not eligible ❌ (Required: ${cutoff}, You scored: ${score})`;
+      }
+    }
+
+    function verify() {
+      const score = parseInt(document.getElementById("scoreInput").value);
+      const course = document.getElementById("courseSelect").value;
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(score) || score < 0) {
+        resultDiv.innerText = "Please enter a valid score.";
+        resultDiv.style.color = "red";
+        return;
+      }
+      if (course === "") {
+        resultDiv.innerText = "Please select a course.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const output = checkEligibility(score, course);
+      resultDiv.innerText = output;
+      resultDiv.style.color = output.includes("Eligible") ? "green" : "red";
+    }
+  </script>
+</body>
+</html>

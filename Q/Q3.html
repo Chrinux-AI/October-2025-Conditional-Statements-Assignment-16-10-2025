@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Even Item Discount Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      text-align: center;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 15px;
+      cursor: pointer;
+      width: 85%;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Even Item Discount Checker</h2>
+    <input type="number" id="itemInput" placeholder="Enter number of items">
+    <button onclick="checkForDiscount()">Check Discount</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkDiscount(items) {
+      if (items % 2 === 0) {
+        return "You qualify for a discount! 🎉";
+      } else {
+        return "No discount — odd number of items.";
+      }
+    }
+
+    function checkForDiscount() {
+      const items = parseInt(document.getElementById('itemInput').value);
+      if (isNaN(items) || items < 0) {
+        document.getElementById('result').innerText = "Please enter a valid positive number.";
+        return;
+      }
+      const result = checkDiscount(items);
+      document.getElementById('result').innerText = result;
+    }
+  </script>
+</body>
+</html>

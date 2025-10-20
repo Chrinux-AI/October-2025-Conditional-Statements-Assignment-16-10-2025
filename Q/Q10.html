@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supermarket Discount Calculator</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f5f9ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 {
+      color: #004080;
+      margin-bottom: 15px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 85%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Supermarket Discount Calculator</h2>
+    <input type="number" id="amountInput" placeholder="Enter purchase amount (₦)">
+    <button onclick="calculate()">Calculate Discount</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateDiscount(amount) {
+      let discountRate = 0;
+
+      if (amount < 5000) {
+        discountRate = 0;
+      } else if (amount <= 10000) {
+        discountRate = 0.05;
+      } else if (amount <= 20000) {
+        discountRate = 0.10;
+      } else {
+        discountRate = 0.15;
+      }
+
+      const discount = amount * discountRate;
+      const finalPrice = amount - discount;
+
+      return {
+        discountRate: discountRate * 100 + "%",
+        discountAmount: "₦" + discount.toFixed(2),
+        finalPrice: "₦" + finalPrice.toFixed(2)
+      };
+    }
+
+    function calculate() {
+      const amount = parseFloat(document.getElementById("amountInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(amount) || amount <= 0) {
+        resultDiv.innerText = "Please enter a valid purchase amount.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const result = calculateDiscount(amount);
+
+      resultDiv.innerHTML = `
+        Discount Rate: ${result.discountRate}<br>
+        Discount Amount: ${result.discountAmount}<br>
+        Final Price: ${result.finalPrice}
+      `;
+      resultDiv.style.color = "#003366";
+    }
+  </script>
+</body>
+</html>

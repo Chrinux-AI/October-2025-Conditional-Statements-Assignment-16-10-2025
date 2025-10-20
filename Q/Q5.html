@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator - SQI Clinic</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      width: 85%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>SQI Clinic BMI Calculator</h2>
+    <input type="number" id="weight" placeholder="Enter weight (kg)" step="0.1">
+    <input type="number" id="height" placeholder="Enter height (m)" step="0.01">
+    <button onclick="showBMI()">Calculate BMI</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateBMI(weight, height) {
+      const bmi = weight / (height * height);
+      let category;
+      
+      if (bmi < 18.5) {
+        category = "Underweight";
+      } else if (bmi < 25) {
+        category = "Normal";
+      } else if (bmi < 30) {
+        category = "Overweight";
+      } else {
+        category = "Obese";
+      }
+
+      return { bmi: bmi.toFixed(2), category };
+    }
+
+    function showBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        resultDiv.innerText = "Please enter valid positive values.";
+        return;
+      }
+
+      const { bmi, category } = calculateBMI(weight, height);
+      resultDiv.innerText = `Your BMI is ${bmi} (${category}).`;
+    }
+  </script>
+</body>
+</html>

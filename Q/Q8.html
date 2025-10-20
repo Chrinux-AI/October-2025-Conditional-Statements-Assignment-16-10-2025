@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAU Email Verification</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #eef7ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+    h2 {
+      color: #003366;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #0044cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 85%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003399;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>OAU Email Verification Portal</h2>
+    <input type="email" id="emailInput" placeholder="Enter your OAU email">
+    <button onclick="checkEmail()">Verify Email</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function verifyOAUEmail(email) {
+      const domain = "@oauife.edu.ng";
+      if (email.toLowerCase().endsWith(domain)) {
+        return "Valid OAU Email ✅";
+      } else {
+        return "Invalid Email ❌ — must end with @oauife.edu.ng";
+      }
+    }
+
+    function checkEmail() {
+      const email = document.getElementById("emailInput").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (email === "") {
+        resultDiv.innerText = "Please enter an email address.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const status = verifyOAUEmail(email);
+      resultDiv.innerText = status;
+      resultDiv.style.color = status.includes("Valid") ? "green" : "red";
+    }
+  </script>
+</body>
+</html>

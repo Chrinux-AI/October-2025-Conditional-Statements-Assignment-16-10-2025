@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Categorizer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      width: 380px;
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+    button {
+      margin-top: 15px;
+      width: 85%;
+      padding: 10px;
+      font-size: 16px;
+      background: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0b7dda;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Temperature Categorizer</h2>
+    <input type="number" id="tempInput" placeholder="Enter temperature (°C)">
+    <button onclick="showCategory()">Categorize</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function categorizeTemperature(temp) {
+      if (temp < 19) {
+        return "Cold ❄️";
+      } else if (temp >= 20 && temp <= 28) {
+        return "Warm 🌤️";
+      } else {
+        return "Hot 🔥";
+      }
+    }
+
+    function showCategory() {
+      const temp = parseFloat(document.getElementById('tempInput').value);
+      const resultDiv = document.getElementById('result');
+      if (isNaN(temp)) {
+        resultDiv.innerText = "Please enter a valid number.";
+        return;
+      }
+      resultDiv.innerText = "Temperature Category: " + categorizeTemperature(temp);
+    }
+  </script>
+</body>
+</html>
+    

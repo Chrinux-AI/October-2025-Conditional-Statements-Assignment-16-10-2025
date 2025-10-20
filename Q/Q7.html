@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luggage Weight Checker - Kano Airline</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f1f8ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      width: 85%;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Kano Airline - Luggage Weight Checker</h2>
+    <input type="number" id="weightInput" placeholder="Enter luggage weight (kg)" step="0.1">
+    <button onclick="showLuggageStatus()">Check Status</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkLuggageWeight(weight) {
+      if (weight < 20) {
+        return "Underweight ✈️";
+      } else if (weight <= 30) {
+        return "Allowed ✅";
+      } else {
+        return "Overweight ⚠️";
+      }
+    }
+
+    function showLuggageStatus() {
+      const weight = parseFloat(document.getElementById('weightInput').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(weight) || weight <= 0) {
+        resultDiv.innerText = "Please enter a valid positive weight.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const status = checkLuggageWeight(weight);
+      resultDiv.innerText = "Luggage Status: " + status;
+      resultDiv.style.color = "#333";
+    }
+  </script>
+</body>
+</html>

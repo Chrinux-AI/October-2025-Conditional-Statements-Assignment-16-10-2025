@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Username Validator - Gaming Company</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #f0f9ff, #ffffff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      outline: none;
+      text-align: center;
+    }
+    button {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      width: 85%;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #138496;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Username Validator</h2>
+    <input type="text" id="usernameInput" placeholder="Enter your username">
+    <button onclick="checkUsername()">Validate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function validateUsername(username) {
+      const pattern = /^[A-Za-z0-9_]+$/;
+      return pattern.test(username);
+    }
+
+    function checkUsername() {
+      const username = document.getElementById('usernameInput').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!username) {
+        resultDiv.innerText = "Please enter a username.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      if (validateUsername(username)) {
+        resultDiv.innerText = "✅ Valid username!";
+        resultDiv.style.color = "green";
+      } else {
+        resultDiv.innerText = "❌ Invalid username — only letters, numbers, and underscores are allowed.";
+        resultDiv.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

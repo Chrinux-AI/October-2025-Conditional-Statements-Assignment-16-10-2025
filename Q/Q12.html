@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INEC Voter Eligibility Checker</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f0faff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 {
+      color: #004080;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 85%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>INEC Voter Eligibility Checker (2025)</h2>
+    <input type="number" id="birthYearInput" placeholder="Enter your birth year">
+    <button onclick="checkEligibility()">Check Eligibility</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkVotingEligibility(birthYear) {
+      const currentYear = 2025;
+      const age = currentYear - birthYear;
+
+      if (age >= 18) {
+        return `Eligible ✅ (Age: ${age})`;
+      } else if (age >= 0) {
+        const yearsLeft = 18 - age;
+        return `Not eligible ❌ (Age: ${age}). You can vote in ${yearsLeft} year(s).`;
+      } else {
+        return "Invalid birth year entered.";
+      }
+    }
+
+    function checkEligibility() {
+      const year = parseInt(document.getElementById("birthYearInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(year) || year <= 0) {
+        resultDiv.innerText = "Please enter a valid birth year.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const result = checkVotingEligibility(year);
+      resultDiv.innerText = result;
+      resultDiv.style.color = result.includes("Eligible") ? "green" : "red";
+    }
+  </script>
+</body>
+</html>

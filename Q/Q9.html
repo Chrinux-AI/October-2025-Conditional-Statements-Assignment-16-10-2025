@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grading System</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 {
+      color: #003366;
+      margin-bottom: 15px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 85%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Student Grading System</h2>
+    <input type="number" id="scoreInput" placeholder="Enter score (0 - 100)">
+    <button onclick="checkGrade()">Check Grade</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function getStudentGrade(score) {
+      if (score < 0 || score > 100) {
+        return "Invalid score. Please enter a value between 0 and 100.";
+      } else if (score >= 70) {
+        return "Grade: A (Excellent)";
+      } else if (score >= 60) {
+        return "Grade: B (Very Good)";
+      } else if (score >= 50) {
+        return "Grade: C (Good)";
+      } else if (score >= 40) {
+        return "Grade: D (Pass)";
+      } else {
+        return "Grade: F (Fail)";
+      }
+    }
+
+    function checkGrade() {
+      const score = parseInt(document.getElementById("scoreInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(score)) {
+        resultDiv.innerText = "Please enter a valid number.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const grade = getStudentGrade(score);
+      resultDiv.innerText = grade;
+      resultDiv.style.color = grade.includes("Invalid") ? "red" : "green";
+    }
+  </script>
+</body>
+</html>
